@@ -1,0 +1,100 @@
+/* MEMORY FLIP CARD STYLES - add to globals.css */
+.card {
+  width: 100%;
+  aspect-ratio: 2.5 / 3.5;
+   /* adjust card ratio */
+  perspective: 1000px;
+  background: transparent;
+  border-radius: 0.5rem;
+  display: inline-block;
+  padding: 0;
+  border: none;
+}
+
+.card .card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.45s;
+  transform-style: preserve-3d;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 16px rgba(16,24,40,0.08);
+}
+
+.card .card-front,
+.card .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Front side (face-down) */
+.card .card-front {
+  background: linear-gradient(180deg, #ffffff, #f3f4f6);
+  color: #111827;
+  font-weight: 700;
+  transform: rotateY(0deg) translateZ(1px);
+}
+
+/* Back side (face-up) */
+.card .card-back {
+  background: linear-gradient(180deg, #fff7ed, #fff1e6);
+  transform: rotateY(180deg);
+}
+
+/* Flipped state */
+.card.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* a little hover pop for non-flipped cards */
+.card:not(.is-flipped):hover .card-inner {
+  transform: translateY(-4px);
+  transition: transform 0.18s;
+}
+
+/* smaller fonts at narrow widths */
+@media (max-width: 640px) {
+  .card .card-back { font-size: 2.25rem; }
+  .card .card-front { font-size: 1.5rem; }
+}
+
+/* Make game board fit inside the screen */
+.game-board {
+  max-width: 600px;
+  margin: 0 auto;
+  height: calc(100vh - 180px); /* keeps header visible */
+  display: flex;
+  align-items: center;
+}
+
+/* Grid adjusts automatically */
+.board-grid {
+  width: 100%;
+}
+
+/* Dynamically shrink cards on smaller screens */
+@media (max-width: 900px) {
+  .board-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .board-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .board-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
