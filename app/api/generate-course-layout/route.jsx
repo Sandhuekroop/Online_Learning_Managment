@@ -173,8 +173,7 @@ const PROMPT=`Genrate Learning Course depends on following details. In which Mak
 }
 }
 `
-
- export const ai = new GoogleGenAI({
+const ai = new GoogleGenAI({
     apiKey: process.env.GEMINI_API_KEY,
   });
   
